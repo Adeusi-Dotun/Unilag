@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import './SearchBar.css';
 
-export default function SearchBar({ onSearch, placeholder = "What are you looking for?" }) {
+export default function SearchBar({ onSearch, placeholder = "Search for Products, Vendors and Categories" }) {
     const [query, setQuery] = useState('');
 
     const handleSubmit = (e) => {

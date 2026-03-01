@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
-import { FiShoppingBag, FiUser, FiLogOut, FiGrid, FiShield } from 'react-icons/fi';
+import { FiShoppingBag, FiUser, FiLogOut, FiGrid, FiShield,  } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
@@ -22,7 +22,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="container navbar-inner">
                 <Link to="/" className="navbar-brand" onClick={closeMenu}>
-                    <span>MyShop</span>
+                    <span>myShop</span>
                 </Link>
 
                 <div className="navbar-links-desktop">
@@ -54,6 +54,10 @@ export default function Navbar() {
                             <button className="btn btn-ghost btn-sm" onClick={handleLogout}>
                                 <FiLogOut size={16} />
                             </button>
+                            <Link to='/cart' className='nav-link'>
+                                <FiShoppingBag />
+                            </Link>
+                            
                         </>
                     ) : (
                         <>
@@ -102,6 +106,9 @@ export default function Navbar() {
                             <button className="mobile-link mobile-logout" onClick={handleLogout}>
                                 <FiLogOut size={16} /> Log out
                             </button>
+                            <Link to='/cart' className='mobile-link' onClick={closeMenu}>
+                                <FiShoppingBag /> My Cart
+                            </Link>
                         </>
                     ) : (
                         <>

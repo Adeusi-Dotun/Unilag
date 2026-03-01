@@ -8,6 +8,8 @@ import Register from '../pages/Register/Register';
 import Category from '../pages/Category/Category';
 import ListingDetail from '../pages/ListingDetail/ListingDetail';
 import VendorProfile from '../pages/VendorProfile/VendorProfile';
+import Cart from '../pages/Cart/Cart'
+
 
 // Authenticated pages
 import Profile from '../pages/Profile/Profile';
@@ -94,6 +96,9 @@ export default function AppRoutes() {
                     </ProtectedRoute>
                 }
             />
+            <Route path="/cart" element={<Cart />} />
+
+           
         </Routes>
     );
 }
