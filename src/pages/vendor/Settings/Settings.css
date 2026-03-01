@@ -1,0 +1,22 @@
+.settings-form {
+    max-width: 600px;
+}
+
+.settings-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.save-success {
+    font-size: var(--text-sm);
+    color: var(--success);
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .settings-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}

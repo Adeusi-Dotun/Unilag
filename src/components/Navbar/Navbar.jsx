@@ -22,8 +22,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="container navbar-inner">
                 <Link to="/" className="navbar-brand" onClick={closeMenu}>
-                    <FiShoppingBag className="navbar-logo-icon" />
-                    <span>CampusMarket</span>
+                    <span>MyShop</span>
                 </Link>
 
                 <div className="navbar-links-desktop">

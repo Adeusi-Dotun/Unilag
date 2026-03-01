@@ -1,0 +1,104 @@
+.listing-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-card-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.listing-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.listing-card:hover .listing-card-image {
+    transform: scale(1.05);
+}
+
+.listing-save-btn {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-muted);
+    font-size: 1rem;
+    transition: all var(--transition);
+    backdrop-filter: blur(4px);
+}
+
+.listing-save-btn:hover {
+    background: #fff;
+    color: var(--danger);
+    transform: scale(1.1);
+}
+
+.listing-save-btn.saved {
+    color: var(--danger);
+    background: #fff;
+}
+
+.listing-save-btn.saved svg {
+    fill: var(--danger);
+}
+
+.listing-card-title {
+    display: block;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-bottom: var(--space-1);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.listing-card-title:hover {
+    color: var(--accent);
+}
+
+.listing-card-price {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: var(--space-2);
+}
+
+.listing-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.listing-card-vendor {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.listing-card-vendor:hover {
+    text-decoration: underline;
+}
+
+.listing-card-hostel {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+}
