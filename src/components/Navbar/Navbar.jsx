@@ -101,7 +101,7 @@ export default function Navbar() {
                                 </Link>
                             )}
                             <Link to="/profile" className="mobile-link" onClick={closeMenu}>
-                                <FiUser size={16} /> Profile
+                                <FiUser size={16} /> Profil
                             </Link>
                             <button className="mobile-link mobile-logout" onClick={handleLogout}>
                                 <FiLogOut size={16} /> Log out
