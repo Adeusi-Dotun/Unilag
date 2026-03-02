@@ -107,7 +107,7 @@ export default function Navbar() {
                                 <FiLogOut size={16} /> Log out
                             </button>
                             <Link to='/cart' className='mobile-link' onClick={closeMenu}>
-                                <FiShoppingBag /> My caprisun
+                                <FiShoppingBag /> My cart
                             </Link>
                         </>
                     ) : (
