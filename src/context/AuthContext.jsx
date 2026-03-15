@@ -105,6 +105,7 @@ export function AuthProvider({ children }) {
         isVendor: user?.role === 'vendor',
         isAdmin: user?.role === 'admin',
         isBuyer: user?.role === 'buyer',
+        isRider: user?.role === 'rider',
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

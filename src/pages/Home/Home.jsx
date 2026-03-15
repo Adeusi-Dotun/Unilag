@@ -1,16 +1,16 @@
 import { useState, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import CategoryChips from '../../components/CategoryChips/CategoryChips';
 import ListingCard from '../../components/ListingCard/ListingCard';
 import VendorCard from '../../components/VendorCard/VendorCard';
-import { categories, vendors, listings } from '../../data/mockData';
+import { categories, vendors } from '../../data/mockData';
 import { useVendor } from '../../context/VendorContext';
 import './Home.css';
 
 export default function Home() {
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get('q') || '';
     const [activeCategory, setActiveCategory] = useState(null);
     const { allListings } = useVendor();
     const navigate = useNavigate();
@@ -58,9 +58,6 @@ export default function Home() {
                         <p className="hero-subtitle">
                             Find food, fashion, services, and more from student vendors — all in one place.
                         </p>
-                        <div className="hero-search">
-                            <SearchBar onSearch={setSearchQuery} />
-                        </div>
                     </div>
                 </section>
 

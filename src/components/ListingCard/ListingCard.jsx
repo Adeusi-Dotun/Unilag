@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
-import { FiMapPin, FiHeart } from 'react-icons/fi';
+import { FiMapPin, FiHeart, FiShoppingCart } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import { getVendorById } from '../../data/mockData';
 import './ListingCard.css';
 
 export default function ListingCard({ listing }) {
     const { user, toggleSaveListing } = useAuth();
+    const { addToCart, isInCart } = useCart();
     const vendor = getVendorById(listing.vendorId);
     const isSaved = user?.savedListings?.includes(listing.id);
+    const inCart = isInCart(listing.id);
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-NG', {
@@ -54,6 +57,13 @@ export default function ListingCard({ listing }) {
                         {listing.hostel}
                     </span>
                 </div>
+                <button
+                    className={`listing-card-cart-btn ${inCart ? 'in-cart' : ''}`}
+                    onClick={() => addToCart(listing)}
+                >
+                    <FiShoppingCart size={14} />
+                    {inCart ? 'Added' : 'Add to Cart'}
+                </button>
             </div>
         </div>
     );

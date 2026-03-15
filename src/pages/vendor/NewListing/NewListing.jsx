@@ -13,6 +13,7 @@ export default function NewListing() {
         title: '',
         description: '',
         price: '',
+        quantity: '',
         category: '',
         pickup: '',
         images: [],
@@ -51,6 +52,7 @@ export default function NewListing() {
         const listing = addListing({
             ...formData,
             price: Number(formData.price),
+            quantity: Number(formData.quantity) || 1,
             images: formData.images.length
                 ? formData.images
                 : [`https://placehold.co/600x400/0D7C3E/FFFFFF?text=${encodeURIComponent(formData.title)}`],
@@ -112,21 +114,34 @@ export default function NewListing() {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label className="form-label">Category</label>
-                                    <select
-                                        name="category"
-                                        className="form-select"
-                                        value={formData.category}
+                                    <label className="form-label">Quantity Available</label>
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        className="form-input"
+                                        placeholder="10"
+                                        value={formData.quantity}
                                         onChange={handleChange}
-                                    >
-                                        <option value="">Select category</option>
-                                        {categories.map((c) => (
-                                            <option key={c.id} value={c.id}>
-                                                {c.icon} {c.label}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        min="1"
+                                    />
                                 </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Category</label>
+                                <select
+                                    name="category"
+                                    className="form-select"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Select category</option>
+                                    {categories.map((c) => (
+                                        <option key={c.id} value={c.id}>
+                                            {c.icon} {c.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="form-group">

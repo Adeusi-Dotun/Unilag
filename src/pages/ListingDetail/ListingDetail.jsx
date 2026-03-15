@@ -1,13 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
-import { FiArrowLeft, FiMapPin, FiClock, FiMessageCircle } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FiArrowLeft, FiMapPin, FiClock, FiShoppingCart, FiCheck } from 'react-icons/fi';
 import { getVendorById } from '../../data/mockData';
 import { useVendor } from '../../context/VendorContext';
+import { useCart } from '../../context/CartContext';
 import './ListingDetail.css';
 
 export default function ListingDetail() {
     const { id } = useParams();
     const { allListings } = useVendor();
+    const { addToCart, isInCart } = useCart();
     const listing = allListings.find((l) => l.id === id);
 
     if (!listing) {
@@ -27,6 +28,7 @@ export default function ListingDetail() {
     }
 
     const vendor = getVendorById(listing.vendorId);
+    const inCart = isInCart(listing.id);
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-NG', {
@@ -35,10 +37,6 @@ export default function ListingDetail() {
             minimumFractionDigits: 0,
         }).format(price);
     };
-
-    const whatsappLink = vendor?.whatsapp
-        ? `https://wa.me/${vendor.whatsapp}?text=${encodeURIComponent(`Hi! I'm interested in "${listing.title}" on CampusMarket.`)}`
-        : null;
 
     return (
         <div className="page">
@@ -78,6 +76,19 @@ export default function ListingDetail() {
                             <p>{listing.description}</p>
                         </div>
 
+                        {/* Add to Cart Button */}
+                        <button
+                            className={`btn ${inCart ? 'btn-outline' : 'btn-primary'} btn-lg btn-block`}
+                            onClick={() => addToCart(listing)}
+                            style={{ marginBottom: 'var(--space-5)' }}
+                        >
+                            {inCart ? (
+                                <><FiCheck size={18} /> Added — Add Another</>
+                            ) : (
+                                <><FiShoppingCart size={18} /> Add to Cart</>
+                            )}
+                        </button>
+
                         {/* Vendor Card */}
                         {vendor && (
                             <div className="listing-vendor-card">
@@ -91,17 +102,6 @@ export default function ListingDetail() {
                                     </div>
                                 </Link>
                                 <div className="listing-vendor-actions">
-                                    {whatsappLink && (
-                                        <a
-                                            href={whatsappLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="btn btn-primary"
-                                        >
-                                            <FaWhatsapp size={18} />
-                                            Contact Vendor
-                                        </a>
-                                    )}
                                     <Link to={`/vendor/${vendor.id}`} className="btn btn-outline">
                                         View Profile
                                     </Link>

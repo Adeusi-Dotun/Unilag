@@ -1,11 +1,22 @@
 import { Link } from 'react-router-dom';
-import { FiPackage, FiEye, FiMessageCircle, FiPlus, FiList } from 'react-icons/fi';
+import { FiPackage, FiDollarSign, FiClipboard, FiPlus, FiList, FiEye } from 'react-icons/fi';
 import { useVendor } from '../../../context/VendorContext';
+import { useOrders } from '../../../context/OrderContext';
 import './Dashboard.css';
 
 export default function Dashboard() {
     const { vendorProfile, myListings } = useVendor();
+    const { getOrdersByVendor } = useOrders();
     const activeListings = myListings.filter((l) => l.status === 'active');
+
+    const vendorOrders = vendorProfile ? getOrdersByVendor(vendorProfile.id) : [];
+    const pendingOrders = vendorOrders.filter((o) => o.status === 'pending');
+    const totalEarnings = vendorOrders
+        .filter((o) => o.status === 'confirmed')
+        .reduce((sum, o) => sum + o.total, 0);
+
+    const formatPrice = (price) =>
+        new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', minimumFractionDigits: 0 }).format(price);
 
     const stats = [
         {
@@ -21,16 +32,16 @@ export default function Dashboard() {
             color: 'var(--accent-blue)',
         },
         {
-            label: 'Profile Views',
-            value: Math.floor(Math.random() * 100) + 20,
-            icon: <FiEye />,
-            color: '#7C3AED',
+            label: 'Pending Orders',
+            value: pendingOrders.length,
+            icon: <FiClipboard />,
+            color: '#F59E0B',
         },
         {
-            label: 'Messages',
-            value: Math.floor(Math.random() * 15) + 3,
-            icon: <FiMessageCircle />,
-            color: '#F59E0B',
+            label: 'Total Earnings',
+            value: formatPrice(totalEarnings),
+            icon: <FiDollarSign />,
+            color: '#7C3AED',
         },
     ];
 
@@ -63,6 +74,29 @@ export default function Dashboard() {
                     ))}
                 </div>
 
+                {/* Pending Orders */}
+                {pendingOrders.length > 0 && (
+                    <section className="section">
+                        <div className="section-header">
+                            <h2 className="section-title">⚡ Incoming Orders</h2>
+                            <Link to="/vendor/orders" className="section-link">View all</Link>
+                        </div>
+                        <div className="incoming-orders">
+                            {pendingOrders.slice(0, 3).map((order) => (
+                                <Link key={order.id} to="/vendor/orders" className="incoming-order-card">
+                                    <div className="incoming-order-info">
+                                        <span className="incoming-order-buyer">{order.buyerName}</span>
+                                        <span className="incoming-order-items">
+                                            {order.items.map((i) => i.title).join(', ')}
+                                        </span>
+                                    </div>
+                                    <span className="incoming-order-total">{formatPrice(order.total)}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
                 {/* Quick Actions */}
                 <section className="section">
                     <h2 className="section-title">Quick Actions</h2>
@@ -74,6 +108,10 @@ export default function Dashboard() {
                         <Link to="/vendor/listings" className="quick-action-card">
                             <FiList size={24} />
                             <span>Manage Listings</span>
+                        </Link>
+                        <Link to="/vendor/orders" className="quick-action-card">
+                            <FiClipboard size={24} />
+                            <span>View Orders</span>
                         </Link>
                         <Link to="/vendor/settings" className="quick-action-card">
                             <FiEye size={24} />

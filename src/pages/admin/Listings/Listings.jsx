@@ -53,6 +53,8 @@ export default function AdminListings() {
                     <div className="admin-nav">
                         <Link to="/admin/vendors" className="admin-nav-link">Vendors</Link>
                         <Link to="/admin/listings" className="admin-nav-link active">Listings</Link>
+                        <Link to="/admin/orders" className="admin-nav-link">Orders</Link>
+                        <Link to="/admin/riders" className="admin-nav-link">Riders</Link>
                     </div>
                 </div>
 

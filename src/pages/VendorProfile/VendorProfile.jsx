@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { FiArrowLeft, FiMapPin, FiClock, FiPhone } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
-import { getVendorById, getListingsByVendor } from '../../data/mockData';
+import { getVendorById } from '../../data/mockData';
 import ListingCard from '../../components/ListingCard/ListingCard';
 import { useVendor } from '../../context/VendorContext';
 import './VendorProfile.css';
@@ -30,10 +29,6 @@ export default function VendorProfile() {
     const vendorListings = allListings.filter(
         (l) => l.vendorId === id && l.status === 'active'
     );
-
-    const whatsappLink = vendor.whatsapp
-        ? `https://wa.me/${vendor.whatsapp}?text=${encodeURIComponent(`Hi! I found you on CampusMarket.`)}`
-        : null;
 
     return (
         <div className="page">
@@ -64,20 +59,6 @@ export default function VendorProfile() {
                                     <FiPhone size={14} />
                                     {vendor.phone}
                                 </span>
-                            )}
-                        </div>
-
-                        <div className="vendor-profile-actions">
-                            {whatsappLink && (
-                                <a
-                                    href={whatsappLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn btn-primary"
-                                >
-                                    <FaWhatsapp size={18} />
-                                    Message on WhatsApp
-                                </a>
                             )}
                         </div>
                     </div>

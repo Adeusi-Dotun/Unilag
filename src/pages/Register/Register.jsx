@@ -80,6 +80,13 @@ export default function Register() {
                             >
                                 Sell stuff
                             </button>
+                            <button
+                                type="button"
+                                className={`role-toggle-btn ${formData.role === 'rider' ? 'active' : ''}`}
+                                onClick={() => handleRoleSelect('rider')}
+                            >
+                                Deliver stuff
+                            </button>
                         </div>
                     </div>
 
@@ -158,7 +165,7 @@ export default function Register() {
                             </div>
 
                             <div className="form-group">
-                                <label className="form-label">Phone / WhatsApp</label>
+                                <label className="form-label">Phone</label>
                                 <div className="input-with-icon">
                                     <FiPhone className="input-icon" />
                                     <input

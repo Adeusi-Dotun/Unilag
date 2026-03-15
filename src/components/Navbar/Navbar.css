@@ -26,16 +26,89 @@
     flex-shrink: 0;
 }
 
-
 .navbar-logo-icon {
     color: var(--accent);
     font-size: 1.4rem;
 }
 
-.navbar-links-desktop {
+/* Navbar Search */
+.navbar-search {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: var(--space-2);
+    flex: 1;
+    max-width: 420px;
+    padding: var(--space-2) var(--space-4);
+    background: #E8E8E8;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-full);
+    transition: all var(--transition);
+}
+
+.navbar-search:focus-within {
+    background: #dcdcdc;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.navbar-search-icon {
+    color: #999999;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.navbar-search:focus-within .navbar-search-icon {
+    color: var(--accent);
+}
+
+.navbar-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: var(--text-sm);
+    color: var(--text);
+    outline: none;
+    min-width: 0;
+}
+
+.navbar-search-input::placeholder {
+    color: #888888;
+}
+
+.navbar-search-mobile {
+    display: none;
+}
+
+
+/* Cart Badge */
+.cart-link {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--danger);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transform: translate(4px, -4px);
+}
+
+.navbar-actions-desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
 }
 
 .nav-link {
@@ -49,6 +122,7 @@
     text-decoration: none;
     border-radius: var(--radius);
     transition: all var(--transition);
+    white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -63,12 +137,6 @@
 .nav-link-accent:hover {
     color: var(--accent-hover);
     background: var(--accent-light);
-}
-
-.navbar-actions-desktop {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
 }
 
 .navbar-hamburger {
@@ -146,7 +214,15 @@
 /* Responsive */
 @media (max-width: 768px) {
 
-    .navbar-links-desktop,
+    .navbar-search {
+        display: none;
+    }
+
+    .navbar-search-mobile {
+        display: flex;
+        max-width: 100%;
+    }
+
     .navbar-actions-desktop {
         display: none;
     }
